@@ -1,0 +1,147 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Payment Request</title>
+  <meta name="author" content="Tomasz M">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    function startPayment(){
+      if (!window.PaymentRequest) {
+        // PaymentRequest API is not available. Forwarding to
+        // legacy form based experience.
+        location.href = '/checkout';
+        return;
+      }
+
+      const methods = [
+        {
+          supportedMethods: 'basic-card',
+          data: {
+            supportedNetworks: [
+              'visa', 'mastercard', 'amex', 'discover',
+              'diners', 'jcb', 'unionpay'
+            ]
+          }
+        }, 
+        {
+          supportedMethods: 'https://google.com/pay',
+        },
+        {
+          supportedMethods: 'https://apple.com/apple-pay',
+        },
+      ];
+      const details = {
+        displayItems: [
+          {
+            label: 'Chleb',
+            amount: { currency: 'PLN', value: '25.50' }
+          },
+          {
+            label: 'Dzem',
+            amount: { currency: 'PLN', value: 10 },
+          }, 
+          {
+            label: 'Podatek', 
+            pending: true,
+            amount: { currency: 'PLN', value: -2 },
+          }
+        ],
+        total: {
+          label: 'Artykuły',
+          amount: { currency: 'PLN', value : '22.15' }
+        }
+      };
+      const options = {
+        requestShipping: true,
+        requestPayerEmail: true,
+        requestPayerPhone: true,
+        requestPayerName: true,
+        shippingType: 'delivery'
+      };
+      const shippingOptions = [
+        {
+          id: 'economy',
+          label: 'Economy Shipping (5-7 Days)',
+          amount: {
+            currency: 'USD',
+            value: '0',
+          },
+        }, 
+        {
+          id: 'express',
+          label: 'Express Shipping (2-3 Days)',
+          amount: {
+            currency: 'USD',
+            value: '5',
+          },
+        },
+      ];
+
+      const request = new PaymentRequest(methods, details, options)
+      request.show().then(response => {
+        // Ogarnij platnosc z backendem i zamknij okno...
+        console.log(response)
+        response.complete('success').then(() => {
+          // ... lub najpierw zamknij okno i ogarnij platnosc
+        });
+      }).catch(e => console.log('platnosc anulowana'));
+
+      request.addEventListener('shippingaddresschange', (event) => {
+        console.log(event.target.shippingAddress)
+
+        const validateAddress = new Promise(resolve => {
+          setTimeout(() => {
+            const paymentDetails = {
+              total: {
+                label: 'Total',
+                amount: {
+                  currency: 'USD',
+                  value: 10,
+                },
+              },
+              shippingOptions,
+            };
+            resolve(paymentDetails)
+          }, 1500)
+        })
+        
+        event.updateWith(validateAddress);
+      });
+
+      request.addEventListener('shippingoptionchange', (event) => {
+        // Step 1: Get the payment request object.
+        const prInstance = event.target;
+
+        // Step 2: Get the ID of the selected shipping option.
+        const selectedId = prInstance.shippingOption;
+
+        // Step 3: Mark selected option
+        shippingOptions.forEach((option) => {
+          option.selected = option.id === selectedId;
+        });
+
+        // TODO: Update total and display items, including pending states.
+
+        event.updateWith({
+          total: {
+            label: 'Total',
+            amount: {
+              currency: 'PLN',
+              value: '25',
+            },
+          },
+          shippingOptions,
+        });
+      });
+    }
+  </script>
+</head>
+
+<body>
+  <h1>PAYMENT</h1>
+  <button onclick="startPayment()">kliknij by zapłacić</button>
+</body>
+</html>

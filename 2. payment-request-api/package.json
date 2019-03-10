@@ -1,0 +1,11 @@
+{
+  "name": "1.-web-app-manifest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "python -m SimpleHTTPServer"
+  },
+  "author": "",
+  "license": "ISC"
+}

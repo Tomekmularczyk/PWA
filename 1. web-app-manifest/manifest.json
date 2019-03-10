@@ -1,7 +1,8 @@
 {
   "short_name": "PWA",
   "name": "PWA EVERYWHERE",
-  "background_color": "yellow",
+  "background_color": "#66fff2",
+  "theme_color": "#66fff2",
   "description": "dodaje manifest i na tym koniec",
   "dir": "auto",
   "display": "fullscreen",
@@ -14,7 +15,7 @@
   ],
   "lang": "pl",
   "orientation": "portrait-primary",
-  "prefer_related_applications": true,
+  "prefer_related_applications": false,
   "related_applications": [
     {
       "platform": "play",
@@ -22,6 +23,5 @@
       "id": "com.example.app1"
     }
   ],
-  "start_url": "/",
-  "theme_color": "yellow"
+  "start_url": "/"
 }
