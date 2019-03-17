@@ -29,7 +29,8 @@ To moze doprowadzic do sytuacji ze jest kilka service workerow oczekujacych na u
 3. Aktywacja
   - usuwanie resourców z cachu, których juz nie potrzebujemy 
   - self.clients.claim() - nie czekaj az praca reszty service workerów zostanie zakonczona, ale ka przeglądarce uyzywac obecnego SW
-  - ustaw caching strategies
+  - usówanie cachu
+4. Fetch handlery
 
 Defaultowy scope service-workera to sciezka do niego na serwerze.
 
@@ -63,3 +64,16 @@ Zwróć uwagę kiedy pokazać popup zezwalający apce na notyfikacje. Jezeli uzy
 Dlatego dobra strategia jest pokazanie spersonalizowanego popupa, ktory informuje uzytkownika o kontekscie dla jakiego chcielibysmy wysylac mu notyfikacje,
 dopiero gdy sie zgodzi, pokazac mu natywny popup do wlaczenia notyfikacji.
 https://github.com/web-push-libs/web-push
+
+### indexedDB
+1. Podczas gdy DOM Storage nadaje się do przechowywania małych ilości danych i typu String, to indexedDB moze przechowywac duzo wiecej i rozne typy danych jak zdjecia i pliki.
+2. Zazwyczaj jest jedna baza danych na aplikacje.
+3. Baza danych zawiera zazwyczaj jeden lub więcej object-store - jest to coś w rodzaju tabeli.
+4. Dobrze ustrukturyzowana baza danych powinna mieć jeden store na dany typ danych (typ jak interfejs w TS)
+5. Kazdy object store powinien miec zdefiniowany primary key.
+6. Index Stores...
+7. Wszelkie dzialania na bazie dzieją sie w ramach tranzakcji, które są atomiczne
+8. Przy otwieraniu polaczenia z bazą podaje sie jej nową wersje. Jezeli wersja jest inna niz w bazie odpala sie callback do migracji
+
+Statyczne assety, strony i resourcy które są dostępne pod urlem powinny trafiać do CacheStorage, natomiast dynamiczne dane jak obiekty JSON do indexedBD.
+W iDB moglibyśmy np. zapisywać akcje jakie uzytkownik wykonywal offline i gdy powroci polaczenie wykonac je spowrotem do serwera.
