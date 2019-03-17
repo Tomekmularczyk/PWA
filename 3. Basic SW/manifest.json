@@ -1,0 +1,27 @@
+{
+  "short_name": "PWA",
+  "name": "PWA EVERYWHERE",
+  "background_color": "#66fff2",
+  "theme_color": "#66fff2",
+  "description": "dodaje manifest i na tym koniec",
+  "dir": "auto",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "/ikona.png",
+      "sizes": "512x512 192x192 144x144 64x64 32x32 24x24 16x16",
+      "type": "image/png"
+    }
+  ],
+  "lang": "pl",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.example.app1",
+      "id": "com.example.app1"
+    }
+  ],
+  "start_url": "/"
+}

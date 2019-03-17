@@ -8,6 +8,13 @@ Aplikacje PWA muszą być FIRE:
 * Niezawodne - działać w przypadku braku internetu, albo łagodnie fallbackować, ale nie pokazywać dinozaura - RELIABLE
 * Angazujące - OS moze obudzic service workera nawet gdy apka jest zamknieta, a wtedy apka moze wysyłac powiadomienia jak natywna aplikacja ENGAGING
 
+Migracja do PWA:
+1. Uzycie HTTPS
+2. Uzywanie cachowania i service-workera
+3. App Shell architecture - odseparowanie UI i struktury aplikacji od danych jakie prezentuje - tak jak robią aplikacje natywne.
+4. Dodanie "Add to homescreen" buttona
+5. Dodanie Push Notifications, Payment API, Credentials, etc.
+
 ### web app manifest
 - kontroluje jak apka powinna byc zainstalowana i wygladac na systemie
 
