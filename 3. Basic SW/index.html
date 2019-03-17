@@ -1,0 +1,27 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>SW</title>
+  <meta name="author" content="Tomasz M">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <h1>STRONA GLOWNA</h1>
+  <a href="/a.html">go to page A</a>
+  <br />
+  <a href="/b.html">go to page B</a>
+  <br />
+  <a href="/c.html">go to page C</a>
+  <br />
+  <a href="/article.html">go to article page</a>
+  <script>
+    if('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js')
+    }
+  </script>
+</body>
+</html>

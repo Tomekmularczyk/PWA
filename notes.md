@@ -31,6 +31,8 @@ To moze doprowadzic do sytuacji ze jest kilka service workerow oczekujacych na u
   - self.clients.claim() - nie czekaj az praca reszty service workerów zostanie zakonczona, ale ka przeglądarce uyzywac obecnego SW
   - ustaw caching strategies
 
+Defaultowy scope service-workera to sciezka do niego na serwerze.
+
 Caching strategies (kazdy ma jakies wady):
 - cache first -  fetch event listener - gdy przegladarka robi request, sprawdz czy resource jest cachu i w razie czego zwroc zamiast robic request (fast response, dla resourcow co sie zadko zmieniaja)
 - network first - gdy zawsze chcemy swiezy kontent. Po udanym requescie update cachu
