@@ -1,0 +1,11 @@
+{
+  "name": "push",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "python -m SimpleHTTPServer 3000"
+  },
+  "author": "",
+  "license": "ISC"
+}

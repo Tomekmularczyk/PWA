@@ -1,59 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 
 <html lang="en">
-<head>
-  <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
 
-  <title>SW</title>
-  <meta name="author" content="Tomasz M">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <script>
-    let deferredPrompt;
-    window.addEventListener('beforeinstallprompt', event => {
+    <title>SW</title>
+    <meta name="author" content="Tomasz M" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
 
-      // Prevent Chrome 67 and earlier from automatically showing the prompt
-      event.preventDefault();
-
-      // Stash the event so it can be triggered later.
-      deferredPrompt = event;
-
-      // Attach the install prompt to a user gesture
-      document.querySelector('#installBtn').addEventListener('click', event => {
-
-        // Show the prompt
-        deferredPrompt.prompt();
-
-        // Wait for the user to respond to the prompt
-        deferredPrompt.userChoice
-          .then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-              console.log('User accepted the A2HS prompt');
-            } else {
-              console.log('User dismissed the A2HS prompt');
-            }
-            deferredPrompt = null;
-          });
-      });
-
-      // Update UI notify the user they can add to home screen
-      document.querySelector('#installBanner').style.display = 'flex';
-    });
-  </script>
-</head>
-
-<body>
-  <h1>STRONA GLOWNA</h1>
-  <a href="/a.html">go to page A</a>
-  <br />
-  <a href="/b.html">go to page B</a>
-  <br />
-  <a href="/c.html">go to page C</a>
-  <br />
-  <a href="/article.html">go to article page</a>
-  <script>
-    if('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js')
-    }
-  </script>
-</body>
+  <body>
+    <h1>STRONA GLOWNA</h1>
+    <a href="/a.html">go to page A</a>
+    <br />
+    <a href="/b.html">go to page B</a>
+    <br />
+    <a href="/c.html">go to page C</a>
+    <br />
+    <a href="/article.html">go to article page</a>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("sw.js");
+      }
+    </script>
+  </body>
 </html>
